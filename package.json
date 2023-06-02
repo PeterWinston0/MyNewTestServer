@@ -1,0 +1,38 @@
+{
+  "name": "PROJECT_MANAGEMENT_SYSTEM",
+  "version": "1.0.0",
+  "description": "Mongo-Express-Node REST-API made during EASV PBA-WD Spring 2023",
+  "main": "server.js",
+  "scripts": {
+    "start-dev": "cross-env NODE_ENV=development nodemon server.js",
+    "test": "cross-env NODE_ENV=test mocha --exit"
+  },
+  "keywords": [
+    "mongodb",
+    "mongoose",
+    "nodejs",
+    "expressjs"
+  ],
+  "author": "smsj",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.19.1",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv-flow": "^3.2.0",
+    "express": "^4.17.2",
+    "joi": "^17.8.3",
+    "jsonwebtoken": "^9.0.0",
+    "mongodb": "^4.3.1",
+    "mongoose": "^6.1.7",
+    "swagger-ui-express": "^4.6.1",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
+    "mocha": "^10.2.0",
+    "nodemon": "^2.0.22"
+  }
+}
