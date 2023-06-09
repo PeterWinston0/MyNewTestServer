@@ -5,9 +5,9 @@ const server = require("../server");
 
 chai.use(chaiHttp);
 
-describe("Product workflow tests", () => {
+describe("Project workflow tests", () => {
   // POST Create functional test
-  it("should register + login a user, create product and verify 1 in DB", (done) => {
+  it("should register + login a user, create project and verify 1 in DB", (done) => {
     // 1) Register new user
     let user = {
       name: "Peter Petersen",
@@ -38,37 +38,33 @@ describe("Product workflow tests", () => {
             expect(res.body.error).to.be.equal(null);
             let token = res.body.data.accessToken;
 
-            // 3) Create new product
-            let product = {
-              name: "Test Product",
-              description: "Test Product Description",
-              price: 100,
-              inStock: true,
+            // 3) Create new project
+            let project = {
+              title: "Test Project",
+              description: "Test Project Description",
             };
 
             chai
               .request(server)
-              .post("/api/products")
+              .post("/api/project")
               .set({ "auth-token": token })
-              .send(product)
+              .send(project)
               .end((err, res) => {
                 // Asserts
                 expect(res.status).to.be.equal(201);
                 expect(res.body).to.be.a("array");
                 expect(res.body.length).to.be.eql(1);
 
-                let savedProduct = res.body[0];
-                expect(savedProduct.name).to.be.equal(product.name);
-                expect(savedProduct.description).to.be.equal(
-                  product.description
+                let savedProject = res.body[0];
+                expect(savedProject.title).to.be.equal(project.title);
+                expect(savedProject.description).to.be.equal(
+                  project.description
                 );
-                expect(savedProduct.price).to.be.equal(product.price);
-                expect(savedProduct.inStock).to.be.equal(product.inStock);
 
                 // 4) Verify one product in test DB
                 chai
                   .request(server)
-                  .get("/api/products/")
+                  .get("/api/project/")
                   .end((err, res) => {
                     // Asserts
                     expect(res.status).to.be.equal(200);
@@ -83,7 +79,7 @@ describe("Product workflow tests", () => {
   });
 
   // Valid input test (register, login, )
-  it("should register + login a user, create product and delete it from DB", (done) => {
+  it("should register + login a user, create project and delete it from DB", (done) => {
     // 1) Register new user
     let user = {
       name: "Peter Petersen",
@@ -115,43 +111,39 @@ describe("Product workflow tests", () => {
             let token = res.body.data.accessToken;
 
             // 3) Create new product
-            let product = {
-              name: "Test Product",
-              description: "Test Product Description",
-              price: 100,
-              inStock: true,
+            let project = {
+              title: "Test Project",
+              description: "Test Project Description",
             };
 
             chai
               .request(server)
-              .post("/api/products")
+              .post("/api/project")
               .set({ "auth-token": token })
-              .send(product)
+              .send(project)
               .end((err, res) => {
                 // Asserts
                 expect(res.status).to.be.equal(201);
                 expect(res.body).to.be.a("array");
                 expect(res.body.length).to.be.eql(1);
 
-                let savedProduct = res.body[0];
-                expect(savedProduct.name).to.be.equal(product.name);
-                expect(savedProduct.description).to.be.equal(
-                  product.description
+                let savedProject = res.body[0];
+                expect(savedProject.title).to.be.equal(project.title);
+                expect(savedProject.description).to.be.equal(
+                  project.description
                 );
-                expect(savedProduct.price).to.be.equal(product.price);
-                expect(savedProduct.inStock).to.be.equal(product.inStock);
 
                 // 4) Delete product
                 chai
                   .request(server)
-                  .delete("/api/products/" + savedProduct._id)
+                  .delete("/api/project/" + savedProject._id)
                   .set({ "auth-token": token })
                   .end((err, res) => {
                     // Asserts
                     expect(res.status).to.be.equal(200);
                     const actualVal = res.body.message;
                     expect(actualVal).to.be.equal(
-                      "Product was successfully deleted."
+                      "Project was successfully deleted."
                     );
                     done();
                   });

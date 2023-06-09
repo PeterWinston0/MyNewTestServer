@@ -1,5 +1,5 @@
 {
-  "name": "PROJECT_MANAGEMENT_SYSTEM",
+  "name": "PROJECT MANAGEMENT SYSTEM",
   "version": "1.0.0",
   "description": "Mongo-Express-Node REST-API made during EASV PBA-WD Spring 2023",
   "main": "server.js",
